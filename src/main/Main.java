@@ -74,11 +74,16 @@ public class Main extends Application {
         root.setAlignment(Pos.CENTER);
         root.setHgap(10);
         root.setVgap(12);
+        root.setOnKeyPressed(e -> {
+
+            if (e.getCode() == KeyCode.ENTER) {
+                btn.fire();
+            }
+
+        });
 
         Rectangle2D rec = Screen.getPrimary().getVisualBounds();
 
-        //stage.setMinWidth(450);
-        //stage.setMinHeight(400);
         stage.setWidth(450);
         stage.setHeight(400);
         stage.setResizable(false);

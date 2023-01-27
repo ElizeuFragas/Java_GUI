@@ -1,13 +1,12 @@
 package app;
 
-import javafx.geometry.Insets;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -61,7 +60,7 @@ public class Welcome {
 
         stage.initModality(Modality.APPLICATION_MODAL);
 
-        label.setText("Do you sure about that ?");
+        label.setText("Are you sure about that ?");
         label.setFont(Font.font(15));
 
         yesBt = new Button();
@@ -83,16 +82,12 @@ public class Welcome {
         hbox.getChildren().addAll(yesBt, noBt);
         hbox.setSpacing(10);
         hbox.setAlignment(Pos.CENTER);
-        //hbox.setStyle("-fx-background-color: grey");
 
         vbox.getChildren().addAll(label, hbox);
         vbox.setSpacing(20);
         vbox.setAlignment(Pos.CENTER);
         vbox.setPadding(new Insets(10, 0, 10, 0));
 
-        //pane.getChildren().add(vbox);
-        
-        //StackPane.setMargin(vbox, new Insets(90, 0, 70, 0));
 
         Rectangle2D rec = Screen.getPrimary().getVisualBounds();
 
