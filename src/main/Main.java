@@ -2,9 +2,12 @@ package app;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.stage.Screen;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -36,20 +39,34 @@ public class Main extends Application {
 
         userName.setAlignment(Pos.CENTER_LEFT); 
         userName.setPromptText("User name");
-        userName.setId("txtfield");
+        userName.setOnKeyPressed(e -> {
+
+            if (e.getCode() == KeyCode.ENTER) {
+                btn.fire();
+            }
+
+        });
 
         userPass.setPromptText("Password");
+        userPass.setOnKeyPressed(e -> {
+
+            if (e.getCode() == KeyCode.ENTER) {
+                btn.fire();
+            }
+
+        });
 
         btn.setText("Enter");
         btn.setOnAction(event -> {
 
-            Scene scene2 = Welcome.display(userName.getText(), stage, scene);
+            Scene scene2 = Welcome.display(userName);
             stage.setScene(scene2);
 
         });
 
         btPane.getChildren().add(btn);
 
+        root.requestFocus();
         root.add(namePane, 0, 0);
         root.add(userName, 0, 5);
         root.add(userPass, 0, 6);
@@ -58,13 +75,17 @@ public class Main extends Application {
         root.setHgap(10);
         root.setVgap(12);
 
+        Rectangle2D rec = Screen.getPrimary().getVisualBounds();
 
-        stage.setMinWidth(450);
-        stage.setMinHeight(400);
-        stage.setMaxWidth(450);
-        stage.setMaxHeight(400);
+        //stage.setMinWidth(450);
+        //stage.setMinHeight(400);
+        stage.setWidth(450);
+        stage.setHeight(400);
+        stage.setResizable(false);
+        stage.setX((rec.getWidth()-stage.getWidth())/2);
+        stage.setY((rec.getHeight()-stage.getHeight())/2);
         stage.setScene(scene);
-        stage.initStyle(StageStyle.UTILITY);
+        stage.initStyle(StageStyle.UNIFIED);
         stage.show();
     }
     public static void main(String[] args){
