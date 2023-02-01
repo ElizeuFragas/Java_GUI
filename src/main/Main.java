@@ -10,17 +10,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.control.Label;
-import app.Welcome;
 
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) throws Exception{
 
         GridPane root = new GridPane();
         StackPane btPane = new StackPane();
@@ -29,7 +27,7 @@ public class Main extends Application {
         TextField userName = new TextField();
         TextField userPass = new TextField();
         Label loginName = new Label();
-        Scene scene = new Scene(root);
+        Scene scene1 = new Scene(root);
 
         loginName.setText("Login");
         loginName.setFont(Font.font(24));
@@ -37,7 +35,8 @@ public class Main extends Application {
         namePane.setAlignment(Pos.TOP_LEFT);
         namePane.getChildren().add(loginName);
 
-        userName.setAlignment(Pos.CENTER_LEFT); 
+        userName.setId("user_name");
+        userName.setAlignment(Pos.CENTER_LEFT);
         userName.setPromptText("User name");
         userName.setOnKeyPressed(e -> {
 
@@ -59,9 +58,8 @@ public class Main extends Application {
         btn.setText("Enter");
         btn.setOnAction(event -> {
 
-            Scene scene2 = Welcome.display(userName);
-            stage.setScene(scene2);
-
+            if (stage.isShowing())
+                Welcome.display(userName);
         });
 
         btPane.getChildren().add(btn);
@@ -76,7 +74,7 @@ public class Main extends Application {
         root.setVgap(12);
         root.setOnKeyPressed(e -> {
 
-            if (e.getCode() == KeyCode.ENTER) {
+            if (e.getCode() == KeyCode.ENTER && stage.isShowing()) {
                 btn.fire();
             }
 
@@ -89,8 +87,9 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.setX((rec.getWidth()-stage.getWidth())/2);
         stage.setY((rec.getHeight()-stage.getHeight())/2);
-        stage.setScene(scene);
+        stage.setScene(scene1);
         stage.initStyle(StageStyle.UNIFIED);
+        stage.setTitle("Gui");
         stage.show();
     }
     public static void main(String[] args){

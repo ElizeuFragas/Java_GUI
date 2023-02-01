@@ -19,45 +19,52 @@ import javafx.stage.StageStyle;
 
 public class Welcome {
 
-    public static Scene display(TextField userName){
+    static Stage window;
+    public static void display(TextField userName){
 
-        Scene sc = userName.getScene();
-        Stage window = (Stage)sc.getWindow();
+        GridPane grid = new GridPane();
+        Scene scene2 = new Scene(grid);
         Button btn = new Button();
+        Label label = new Label(); 
+        StackPane btnPane = new StackPane();
+
+        window = (Stage) userName.getScene().getWindow();
+        //if (window == null) {
+        //    window=(Stage) userName.getScene().getWindow();
+        //}
+        Scene sc = userName.getScene();
+
+        System.out.println(userName.getText());
 
         btn.setText("Logout");
         btn.setOnAction(e -> choiceLogout(window, sc));
 
-        StackPane btnPane = new StackPane();
         btnPane.getChildren().add(btn);
 
-        Label label = new Label(); 
         label.setText("Welcome again " + userName.getText());
         label.setFont(Font.font(30));
 
-        GridPane grid = new GridPane();
         grid.add(label, 0, 0);
         grid.add(btnPane, 0, 7);
-        //GridPane.setHalignment(btnPane, HPos.CENTER);
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(12);
 
-        Scene scene = new Scene(grid);
-
-        return scene;
+        if (window.isFocused()) {
+            window.setScene(scene2);
+        }
     }
 
     public static void choiceLogout(Stage st, Scene sc){
 
         Stage stage = new Stage();
         HBox hbox = new HBox();
-        StackPane pane = new StackPane();
         Label label = new Label();
         VBox vbox = new VBox();
         Scene scene = new Scene(vbox);
         Button yesBt, noBt;
 
+        System.out.println(st.getTitle());
         stage.initModality(Modality.APPLICATION_MODAL);
 
         label.setText("Are you sure about that ?");
@@ -69,7 +76,7 @@ public class Welcome {
         yesBt.setMaxHeight(15);
         yesBt.setOnAction(e -> {
             st.setScene(sc);
-            stage.close(); 
+            stage.close();
 
         });
 
@@ -97,7 +104,7 @@ public class Welcome {
         stage.setResizable(false);
         stage.setX((rec.getWidth()-stage.getWidth())/2);
         stage.setY((rec.getHeight()-stage.getHeight())/2);
-        stage.initStyle(StageStyle.UNDECORATED);;
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.showAndWait();
 
     }
