@@ -28,10 +28,9 @@ public class Welcome {
         Label label = new Label(); 
         StackPane btnPane = new StackPane();
 
-        window = (Stage) userName.getScene().getWindow();
-        //if (window == null) {
-        //    window=(Stage) userName.getScene().getWindow();
-        //}
+        if (window == null) {
+            window=(Stage) userName.getScene().getWindow();
+        }
         Scene sc = userName.getScene();
 
         System.out.println(userName.getText());
